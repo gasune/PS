@@ -1,19 +1,22 @@
---: Remove Fog
-local fog
-local function noFog()
-    game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(128, 128, 128);
-    game:GetService("Lighting").FogEnd = 100000;
-    for _, v in next, game:GetService("Lighting"):GetDescendants() do
+--: Constants
+local Lighting = game:GetService("Lighting");
+local fixedLighting;
+local Time;
+
+--: Better Lighting
+local function betterLighting()
+    Lighting.EnvironmentDiffuseScale = 0.85;
+    Lighting:FindFirstChild("low_color_correction").Enabled = false;
+    for _, v in next, Lighting:GetDescendants() do
         if (v:IsA("Atmosphere")) then
-            v:Destroy();
+            v.Density = 0.4
         end
     end
 end
 
 --: In-game Clock
-local Time;
 local function getTime()
-    local totalMinutes = game:GetService("Lighting"):GetMinutesAfterMidnight();
+    local totalMinutes = Lighting:GetMinutesAfterMidnight();
     local Hours = math.floor(totalMinutes / 60);
     local Minutes = math.floor(totalMinutes % 60);
     local Period;
@@ -32,6 +35,7 @@ local function getTime()
     return string.format("%02d:%02d %s", Hours, Minutes, Period);
 end
 
+--: Time UI
 local sGUI = Instance.new("ScreenGui");
 sGUI.ResetOnSpawn = false;
 
@@ -42,10 +46,11 @@ end)
 local timeLabel = Instance.new("TextLabel", sGUI);
 timeLabel.AnchorPoint = Vector2.new(0.5, 0.5);
 timeLabel.BackgroundTransparency = 1;
-timeLabel.Position = UDim2.new(0.8, 0, 0.98, 0);
-timeLabel.Size = UDim2.new(0,1, 0, 0.05, 0);
+timeLabel.Position = UDim2.new(0.8, 0, 0.985, 0);
+timeLabel.Size = UDim2.new(0.07, 0, 0.04, 0);
 timeLabel.Font = Enum.Font.Nunito;
 timeLabel.TextColor3 = Color3.fromRGB(250, 250, 250);
+timeLabel.TextScaled = true;
 
 local function updateTime()
     task.spawn(function()
@@ -53,5 +58,6 @@ local function updateTime()
     end)
 end
 
+--: Listeners
 Time = game:GetService("RunService").RenderStepped:Connect(updateTime);
-fog = game:GetService("RunService").RenderStepped:Connect(noFog);
+fixedLighting = game:GetService("RunService").RenderStepped:Connect(betterLighting);
