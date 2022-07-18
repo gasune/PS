@@ -5,11 +5,11 @@ local Time;
 
 --: Better Lighting
 local function betterLighting()
-    Lighting.EnvironmentDiffuseScale = 0.85;
-    Lighting:FindFirstChild("low_color_correction").Enabled = false;
+    Lighting.EnvironmentDiffuseScale = 0.8;
+    Lighting:FindFirstChild("low_color_correction").Contrast = 0;
     for _, v in next, Lighting:GetDescendants() do
         if (v:IsA("Atmosphere")) then
-            v.Density = 0.4
+            v.Density = 0.375
         end
     end
 end
