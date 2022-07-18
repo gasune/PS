@@ -53,9 +53,7 @@ timeLabel.TextColor3 = Color3.fromRGB(250, 250, 250);
 timeLabel.TextScaled = true;
 
 local function updateTime()
-    task.spawn(function()
-        timeLabel.Text = getTime();
-    end)
+    timeLabel.Text = getTime();
 end
 
 --: Listeners
