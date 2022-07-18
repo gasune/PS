@@ -46,7 +46,7 @@ end)
 local timeLabel = Instance.new("TextLabel", sGUI);
 timeLabel.AnchorPoint = Vector2.new(0.5, 0.5);
 timeLabel.BackgroundTransparency = 1;
-timeLabel.Position = UDim2.new(0.09, 0, -0.012, 0);
+timeLabel.Position = UDim2.new(0.09, 0, -0.013, 0);
 --oldpos = UDim2.new(0.8, 0, 0.985, 0);
 timeLabel.Size = UDim2.new(0.07, 0, 0.04, 0);
 timeLabel.Font = Enum.Font.Nunito;
