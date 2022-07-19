@@ -9,7 +9,7 @@ local function betterLighting()
     Lighting:FindFirstChild("low_color_correction").Contrast = 0;
     for _, v in next, Lighting:GetDescendants() do
         if (v:IsA("Atmosphere")) then
-            v.Density = 0.375
+            v.Density = 0.375;
         end
     end
 end
@@ -46,8 +46,7 @@ end)
 local timeLabel = Instance.new("TextLabel", sGUI);
 timeLabel.AnchorPoint = Vector2.new(0.5, 0.5);
 timeLabel.BackgroundTransparency = 1;
-timeLabel.Position = UDim2.new(0.09, 0, -0.013, 0);
---oldpos = UDim2.new(0.8, 0, 0.985, 0);
+timeLabel.Position = UDim2.new(0.09, 0, -0.014, 0);
 timeLabel.Size = UDim2.new(0.07, 0, 0.04, 0);
 timeLabel.Font = Enum.Font.Nunito;
 timeLabel.TextColor3 = Color3.fromRGB(250, 250, 250);
