@@ -1,7 +1,9 @@
 --: Constants
+local UIS = game:GetService("UserInputService")
 local Lighting = game:GetService("Lighting");
 local fixedLighting;
 local Time;
+local timeToggle = Enum.KeyCode.F3;
 
 --: Better Lighting
 local function betterLighting()
@@ -56,6 +58,13 @@ local function updateTime()
     timeLabel.Text = getTime();
 end
 
+local function onInputBegan(input, gameProcessed)
+    if (input.KeyCode == timeToggle) and (not gameProcessed) then
+        sGUI.Enabled = not sGUI.Enabled;
+    end
+end
+
 --: Listeners
-Time = game:GetService("RunService").RenderStepped:Connect(updateTime);
 fixedLighting = game:GetService("RunService").RenderStepped:Connect(betterLighting);
+Time = game:GetService("RunService").RenderStepped:Connect(updateTime);
+UIS.InputBegan:Connect(onInputBegan);
